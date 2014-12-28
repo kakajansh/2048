@@ -1,0 +1,9 @@
+\\psf\home\documents\visual studio 2013\Projects\2048 hoca\2048 hoca\bin\Debug\2048 hoca.exe.config
+\\psf\home\documents\visual studio 2013\Projects\2048 hoca\2048 hoca\bin\Debug\2048 hoca.exe
+\\psf\home\documents\visual studio 2013\Projects\2048 hoca\2048 hoca\bin\Debug\2048 hoca.pdb
+\\psf\home\documents\visual studio 2013\Projects\2048 hoca\2048 hoca\obj\Debug\2048 hoca.csprojResolveAssemblyReference.cache
+\\psf\home\documents\visual studio 2013\Projects\2048 hoca\2048 hoca\obj\Debug\_2048_hoca.Form1.resources
+\\psf\home\documents\visual studio 2013\Projects\2048 hoca\2048 hoca\obj\Debug\_2048_hoca.Properties.Resources.resources
+\\psf\home\documents\visual studio 2013\Projects\2048 hoca\2048 hoca\obj\Debug\2048 hoca.csproj.GenerateResource.Cache
+\\psf\home\documents\visual studio 2013\Projects\2048 hoca\2048 hoca\obj\Debug\2048 hoca.exe
+\\psf\home\documents\visual studio 2013\Projects\2048 hoca\2048 hoca\obj\Debug\2048 hoca.pdb
