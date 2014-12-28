@@ -1,4 +1,11 @@
-﻿namespace _2048_hoca
+﻿/************************
+ * 
+ * @author KSH © Sayawan.com
+ * @date  12.28.2014
+ * 
+ ************************/
+
+namespace _2048_hoca
 {
     partial class Form1
     {
