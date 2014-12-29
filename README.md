@@ -58,3 +58,5 @@ ODEV
 > - **Oyunda hareket şansı kalmadı ise (tüm kutular dolu ise oyunun tamamlandığı ile ilgili bir mesaj verilecek.** (tam degil)
 > - **Her sayı için farklı renk kullanılacaktır.**
 > - **Oyun fonksiyonel olarak tasarlanacaktır.**
+
+© Sayawan 2014
