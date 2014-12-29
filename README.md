@@ -44,20 +44,17 @@ It is clear that we use loop inside loop. One is **x** another **x-1** so we can
 ODEV
 -------------------
 
-> **NESNE TABANLI ODEV:**
-(siyahlar yapildi)
+> **NESNE TABANLI ODEV:** (siyahlar yapildi)
 
 > - **3x3, 4x4, 5x5, 6x6, 7x7, boyutundaki kutular ile 2048 oynanabilecektir.**
 > - **Oyun ilk olarak başladığında 2 tane 2 sayısı ekranda rastgele kutularda çıkacaktır.**
 > - **Sadece aynı sayılar toplanarak oyun devam edecektir (2+2, 4+4, 8+8, 16+16 ...)**
 > - **Oyun, klavyenin yön tuşları ile oynanacaktır.**
-**a. Sağa hareket**
-**b. Sola hareket**
-**c. Aşağı hareket**
-**d. Yukarı hareket**
-> - Her hareket sonrasında 1 tane %90 olasılıklı 2 veya %10 olasılıklı 4 sayısı ekranda rastgele bir kutuda çıkacaktır.
-> - Oyunda hareket şansı kalmadı ise (tüm mkutular dolu ise oyunun tamamlandığı ile ilgili bir mesaj verilecek.
+> - **a. Sağa hareket**
+> - **b. Sola hareket**
+> - **c. Aşağı hareket**
+> - **d. Yukarı hareket**
+> - **Her hareket sonrasında 1 tane %90 olasılıklı 2 veya %10 olasılıklı 4 sayısı ekranda rastgele bir kutuda çıkacaktır.**
+> - **Oyunda hareket şansı kalmadı ise (tüm kutular dolu ise oyunun tamamlandığı ile ilgili bir mesaj verilecek.** (tam degil)
 > - **Her sayı için farklı renk kullanılacaktır.**
 > - **Oyun fonksiyonel olarak tasarlanacaktır.**
-
-----------

@@ -41,8 +41,9 @@ namespace _2048_hoca
         private static void Subscribe(ToolStripMenuItem item, EventHandler eventHandler)
         {
             // If leaf, add click handler
-            if (item.DropDownItems.Count == 0)
+            if (item.DropDownItems.Count == 0) 
                 item.Click += eventHandler;
+
             // Otherwise recursively subscribe
             else foreach (ToolStripMenuItem subItem in item.DropDownItems)
                     Subscribe(subItem, eventHandler);
@@ -53,6 +54,7 @@ namespace _2048_hoca
         {
             string tiklama = (sender as ToolStripMenuItem).Text;
             Console.WriteLine(tiklama);
+
             if (tiklama != "Start")
             {
                 boardSize = int.Parse(tiklama.Substring(0, 1));
@@ -95,8 +97,8 @@ namespace _2048_hoca
             rand_sayi();
         }
 
-        void oyuna_basla(int n)
-        {
+        //void oyuna_basla(int n)
+        //{
             //Random random = new Random();
             //while(true) {
             //    int sayi1 = random.Next(1, n*n + 1);
@@ -110,26 +112,91 @@ namespace _2048_hoca
             //}
             //this.Controls["txt_kutu6"].Text = "2";
             //this.Controls["txt_kutu11"].Text = "2";
+        //}
+
+        int hangiSayi()
+        {
+            Random random = new Random();
+
+            int sayi = random.NextDouble() < 0.9 ? 2 : 4;
+            return sayi;
         }
 
         void rand_sayi()
         {
-            Random random = new Random();
-            while (true)
-            {
-                int sayi1 = random.Next(1, boardSize*boardSize+1);
-                int sayi2 = random.Next(1, boardSize*boardSize+1);
+            List<int> list = new List<int>();
+            Random r = new Random();
 
-                if (sayi1 != sayi2)
+            for (int i = this.Controls.Count - 1; i >= 0; i--)
+            {
+                if (this.Controls[i] is TextBox && this.Controls[i].Text == "")
                 {
-                    TextBox birinci = this.Controls["txt_kutu" + sayi1] as TextBox;
-                    TextBox ikinci = this.Controls["txt_kutu" + sayi2] as TextBox;
-                    if (birinci.Text == "") { birinci.Text = "2"; }
-                    if (ikinci.Text == "") { ikinci.Text = "2"; }
-                    break;
+                    string ad = this.Controls[i].Name;
+                    string adx = ad.Substring(8, ad.Length-8);
+                    int sayi = int.Parse(adx);
+                    list.Add(sayi);
                 }
             }
+
+            if (list.Count > 1)
+            {
+                int kutu1 = r.Next(1, list.Count);
+                Console.WriteLine(kutu1);
+                list.Remove(kutu1);
+                int kutu2 = r.Next(1, list.Count);
+                Console.WriteLine(kutu1 + " " + kutu2);
+
+                this.Controls["txt_kutu" + kutu1].Text = (r.NextDouble() < 0.9 ? 2 : 4).ToString();
+                this.Controls["txt_kutu" + kutu2].Text = (r.NextDouble() < 0.9 ? 2 : 4).ToString();
+                this.Controls["txt_kutu" + kutu1].BackColor = Color.LightGray;
+                this.Controls["txt_kutu" + kutu2].BackColor = Color.SlateGray;
+            }
+            else if (list.Count == 1)
+            {
+                int kutu = r.Next(1, list.Count);
+                this.Controls["txt_kutu" + kutu].Text = hangiSayi().ToString();
+            }
+            else if (list.Count == 0)
+            {
+                oyun_bitti();
+            }
+
+
         }
+
+        // TODO: impore here
+        void oyun_bitti()
+        {
+            MessageBox.Show("OYUN BITTI");
+        }
+
+        //void rand_sayi()
+        //{
+            //Random random = new Random();
+
+            ////var value = Math.random() < 0.9 ? 2 : 4;
+            //while (true)
+            //{
+            //    int kutu1 = random.Next(1, boardSize*boardSize+1);
+            //    int kutu2 = random.Next(1, boardSize*boardSize+1);
+
+            //    if (sayi1 != sayi2 && kutu1 != kutu2)
+            //    {
+            //        TextBox birinci = this.Controls["txt_kutu" + kutu1] as TextBox;
+            //        TextBox ikinci = this.Controls["txt_kutu" + kutu2] as TextBox;
+
+            //        if (birinci.Text == "") { 
+            //            birinci.Text = sayi1.ToString();
+            //            birinci.BackColor = Color.Black;
+            //        }
+            //        if (ikinci.Text == "") { 
+            //            ikinci.Text = sayi1.ToString();
+            //            birinci.BackColor = Color.Azure;
+            //        }
+
+            //    }
+            //}
+        //}
 
         void renklendir()
         {
@@ -232,8 +299,8 @@ namespace _2048_hoca
                 sol_tus();
             }
 
-            rand_sayi();
             renklendir();
+            rand_sayi();
         }
 
         void asagi_tus()
@@ -345,13 +412,13 @@ namespace _2048_hoca
             }
         }
 
-        // XXX clean up here
+        // TODO: clean up here
         // [islem] just for loggin
         // [toContinue, toBreak] for breaking loops above
         // See more http://stackoverflow.com/a/14226843
         void tekrarlanan_kisim(string islem, int j, int k)
         {
-            Console.WriteLine("[" + islem + "] - " + j + " " + k);
+            //Console.WriteLine("[" + islem + "] - " + j + " " + k);
             TextBox birinci = this.Controls["txt_kutu" + j] as TextBox;
             TextBox ikinci = this.Controls["txt_kutu" + k] as TextBox;
 
