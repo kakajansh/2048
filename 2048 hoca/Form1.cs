@@ -94,7 +94,7 @@ namespace _2048_hoca
             this.Width = 50 * n + 75;
             this.Height = 50 * n + 90;
 
-            rand_sayi();
+            ilk_rand_sayi();
         }
 
         //void oyuna_basla(int n)
@@ -114,14 +114,6 @@ namespace _2048_hoca
             //this.Controls["txt_kutu11"].Text = "2";
         //}
 
-        int hangiSayi()
-        {
-            Random random = new Random();
-
-            int sayi = random.NextDouble() < 0.9 ? 2 : 4;
-            return sayi;
-        }
-
         void rand_sayi()
         {
             List<int> list = new List<int>();
@@ -138,65 +130,93 @@ namespace _2048_hoca
                 }
             }
 
-            if (list.Count > 1)
+            if (list.Count > 0)
             {
-                int kutu1 = r.Next(1, list.Count);
-                Console.WriteLine(kutu1);
-                list.Remove(kutu1);
-                int kutu2 = r.Next(1, list.Count);
-                Console.WriteLine(kutu1 + " " + kutu2);
+                int kutu1 = r.Next(0, list.Count);
+                int item1 = list[kutu1];
+                list.RemoveAt(kutu1);
 
-                this.Controls["txt_kutu" + kutu1].Text = (r.NextDouble() < 0.9 ? 2 : 4).ToString();
-                this.Controls["txt_kutu" + kutu2].Text = (r.NextDouble() < 0.9 ? 2 : 4).ToString();
-                this.Controls["txt_kutu" + kutu1].BackColor = Color.LightGray;
-                this.Controls["txt_kutu" + kutu2].BackColor = Color.SlateGray;
-            }
-            else if (list.Count == 1)
-            {
-                int kutu = r.Next(1, list.Count);
-                this.Controls["txt_kutu" + kutu].Text = hangiSayi().ToString();
+                this.Controls["txt_kutu" + item1].Text = (r.NextDouble() < 0.9 ? 2 : 4).ToString();
+                this.Controls["txt_kutu" + item1].BackColor = Color.LightGray;
             }
             else if (list.Count == 0)
             {
-                oyun_bitti();
+                oyun_bittimi();
+            }
+        }
+
+        void oyun_bittimi()
+        {
+            bool satir = false;
+            bool sutun = false;
+
+            int satir_basi = 1;
+            int sutun_basi = 1;
+           
+            for (int i = 1; i <= boardSize; i++)
+            {
+                for (int j = satir_basi; j < i * boardSize; j++)
+                {
+                    if (this.Controls["txt_kutu" + j].Text == this.Controls["txt_kutu" + (j+1)].Text)
+                    {
+                        //MessageBox.Show((j) + " " + (j+1));
+                        satir = true;
+                        break;
+                    }
+                }
+                satir_basi = satir_basi + boardSize;
             }
 
+            for (int i = 1; i <= boardSize; i++)
+            {
+                for (int j = sutun_basi; j <= boardSize*boardSize; j = j + boardSize)
+                {
+                    if (j + boardSize > boardSize * boardSize) continue;
+  
+                    if (this.Controls["txt_kutu" + j].Text == this.Controls["txt_kutu" + (j + boardSize)].Text)
+                    {
+                        //MessageBox.Show((j) + " " + (j + boardSize));
+                        sutun = true;
+                        break;
+                    }
+                }
+                sutun_basi = sutun_basi + 1;
+            }
 
+            if (satir || sutun)
+            {
+                //MessageBox.Show("daha devam et" + satir + " " + sutun);
+            }
+            else
+            {
+                MessageBox.Show("OYUN BITTI");
+            }
         }
 
-        // TODO: impore here
-        void oyun_bitti()
+        void ilk_rand_sayi()
         {
-            MessageBox.Show("OYUN BITTI");
+            Random random = new Random();
+
+            while (true)
+            {
+                int sayi1 = random.Next(1, boardSize * boardSize + 1);
+                int sayi2 = random.Next(1, boardSize * boardSize + 1);
+
+                if (sayi1 != sayi2)
+                {
+                    TextBox birinci = this.Controls["txt_kutu" + sayi1] as TextBox;
+                    TextBox ikinci = this.Controls["txt_kutu" + sayi2] as TextBox;
+
+                    birinci.Text = "2";
+                    birinci.BackColor = Color.Aqua;
+
+                    ikinci.Text = "2";
+                    ikinci.BackColor = Color.Aquamarine;
+
+                    break;
+                }
+            }
         }
-
-        //void rand_sayi()
-        //{
-            //Random random = new Random();
-
-            ////var value = Math.random() < 0.9 ? 2 : 4;
-            //while (true)
-            //{
-            //    int kutu1 = random.Next(1, boardSize*boardSize+1);
-            //    int kutu2 = random.Next(1, boardSize*boardSize+1);
-
-            //    if (sayi1 != sayi2 && kutu1 != kutu2)
-            //    {
-            //        TextBox birinci = this.Controls["txt_kutu" + kutu1] as TextBox;
-            //        TextBox ikinci = this.Controls["txt_kutu" + kutu2] as TextBox;
-
-            //        if (birinci.Text == "") { 
-            //            birinci.Text = sayi1.ToString();
-            //            birinci.BackColor = Color.Black;
-            //        }
-            //        if (ikinci.Text == "") { 
-            //            ikinci.Text = sayi1.ToString();
-            //            birinci.BackColor = Color.Azure;
-            //        }
-
-            //    }
-            //}
-        //}
 
         void renklendir()
         {
@@ -371,6 +391,7 @@ namespace _2048_hoca
 
                     for (int k = j + 1; k <= basla + (boardSize - 1); k++)
                     {
+                        Console.WriteLine("deneme " + j + " " + k);
                         if (j >= k) { continue; }
 
                         string islem = "LEFT";
@@ -382,7 +403,7 @@ namespace _2048_hoca
 
                     }
                 }
-                basla = basla + 4;
+                basla = basla + boardSize;
             }
         }
 
@@ -442,6 +463,7 @@ namespace _2048_hoca
                 int sum = Int32.Parse(birinci.Text) + Int32.Parse(ikinci.Text);
                 birinci.Text = sum.ToString();
                 ikinci.Text = "";
+                toBreak = true;
             }
         }
 
