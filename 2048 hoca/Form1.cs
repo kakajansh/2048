@@ -119,30 +119,38 @@ namespace _2048_hoca
             List<int> list = new List<int>();
             Random r = new Random();
 
-            for (int i = this.Controls.Count - 1; i >= 0; i--)
+            //for (int i = this.Controls.Count - 1; i >= 0; i--)
+            //{
+            //    if (this.Controls[i] is TextBox && this.Controls[i].Text == "")
+            //    {
+            //        string ad = this.Controls[i].Name;
+            //        string adx = ad.Substring(8, ad.Length-8);
+            //        int sayi = int.Parse(adx);
+            //        list.Add(sayi);
+            //    }
+            //}
+
+            for (int i = 1; i <= boardSize * boardSize; i++)
             {
-                if (this.Controls[i] is TextBox && this.Controls[i].Text == "")
+                if (this.Controls["txt_kutu" + i].Text == "")
                 {
-                    string ad = this.Controls[i].Name;
-                    string adx = ad.Substring(8, ad.Length-8);
-                    int sayi = int.Parse(adx);
-                    list.Add(sayi);
+                    list.Add(i);
                 }
             }
 
-            if (list.Count > 0)
-            {
-                int kutu1 = r.Next(0, list.Count);
-                int item1 = list[kutu1];
-                list.RemoveAt(kutu1);
+                if (list.Count > 0)
+                {
+                    int kutu1 = r.Next(0, list.Count);
+                    int item1 = list[kutu1];
+                    list.RemoveAt(kutu1);
 
-                this.Controls["txt_kutu" + item1].Text = (r.NextDouble() < 0.9 ? 2 : 4).ToString();
-                this.Controls["txt_kutu" + item1].BackColor = Color.LightGray;
-            }
-            else if (list.Count == 0)
-            {
-                oyun_bittimi();
-            }
+                    this.Controls["txt_kutu" + item1].Text = (r.NextDouble() < 0.9 ? 2 : 4).ToString();
+                    this.Controls["txt_kutu" + item1].BackColor = Color.LightGray;
+                }
+                else if (list.Count == 0)
+                {
+                    oyun_bittimi();
+                }
         }
 
         void oyun_bittimi()
