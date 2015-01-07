@@ -364,7 +364,7 @@ namespace _2048_hoca
 
             for (int i = 1; i <= boardSize; i++)
             {
-                for (int j = basla; j <= basla + (boardSize * (boardSize - 1)); j = j + boardSize)
+                for (int j = basla; j <= basla + (boardSize * boardSize - 1); j = j + boardSize)
                 {
                     toBreak = false;
                     toContinue = false;
@@ -456,7 +456,7 @@ namespace _2048_hoca
                 //Console.WriteLine("[BOS] - " + j + " " + k);
                 birinci.Text = ikinci.Text;
                 ikinci.Text = "";
-                //toContinue = true;
+                toContinue = true;
             }
 
             if (birinci.Text != "" && ikinci.Text != "" && birinci.Text != ikinci.Text)
